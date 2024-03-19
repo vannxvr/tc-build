@@ -12,6 +12,7 @@ kecho "Building Clang LLVM (step: ${1})..."
         --assertions \
         --build-stage1-only \
         --build-target distribution \
+        --bolt \
         --defines LLVM_PARALLEL_COMPILE_JOBS=$(nproc --all) LLVM_PARALLEL_LINK_JOBS=$(nproc --all) \
         --install-folder "${install_path}" \
         --install-target distribution \

@@ -18,7 +18,7 @@ kecho "Building Clang LLVM (step: ${1})..."
         --projects clang lld \
         --pgo llvm \
         --quiet-cmake \
-        --shallow-clone \
+        --no-update \
         --targets ARM AArch64 X86 \
         --vendor-string "greenforce" 2>&1 | tee "${llvm_log}"
 

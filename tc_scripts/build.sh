@@ -39,7 +39,7 @@ if [[ "${1}" == final ]]; then
     ./build-binutils.py \
         --install-folder "${install_path}" \
         --binutils-folder "${DIR}/src/binutils-master" \
-        --targets arm aarch64 x86_64 2>&1 | tee "${binutils_log}"
+        --targets arm aarch64 2>&1 | tee "${binutils_log}"
 
     for binutils in "${install_path}"/aarch64-linux-gnu/bin/ld; do
         if ! [[ -f "${binutils}" ]]; then

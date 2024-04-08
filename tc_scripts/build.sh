@@ -17,6 +17,7 @@ kecho "Building Clang LLVM (step: ${1})..."
         --install-folder "${install_path}" \
         --install-target distribution \
         --projects clang lld \
+        --lto thin \
         --pgo llvm \
         --quiet-cmake \
         --no-update \

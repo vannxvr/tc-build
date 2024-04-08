@@ -15,10 +15,10 @@ touch "${release_info}"
     echo -e "[clang-ver]\n${clang_version}\n"
     echo -e "[llvm-commit]\n${llvm_url}\n"
     echo -e "[llvm-commit-msg]\n${lcommit_message}\n"
-    echo -e "[ld-ver]\n${ld_version}\n"
     echo -e "[binutils-ver]\n${binutils_version}\n"
     echo -e "[binutils-commit]\n${binutils_url}\n"
     echo -e "[binutils-commit-msg]\n${bcommit_message}\n"
+    echo -e "[ld-ver]\n${ld_version}\n"
     echo -e "[host-glibc]\n${glibc_version}\n"
     echo -e "[size]\n${release_size}\n"
     echo -e "[shasum]\n${release_shasum}"
@@ -26,11 +26,11 @@ touch "${release_info}"
 
 touch /tmp/commit_desc
 {
-    echo -e "[schedule]: Pull update from commit ${llvm_hash}\n"
+    echo -e "[Scheduled]: Update LLVM from commit ${llvm_hash}\n"
     echo "Tag: ${release_tag}"
     echo "Clang Version: ${short_clang}"
-    echo "LD Version: ${ld_version}"
-    echo -e "Binutils version: ${binutils_version}\n"
+    echo "Binutils version: ${binutils_version}"
+    echo -e "LD Version: ${ld_version}\n"
     echo "Link: https://github.com/greenforce-project/greenforce_clang/releases/tag/${release_tag}"
 } > /tmp/commit_desc
 
@@ -40,23 +40,24 @@ touch /tmp/release_desc
     echo "Binutils version: ${binutils_version}"
     echo -e "LD Version: ${ld_version}\n"
     echo "LLVM commit: ${llvm_url}"
+    echo "Binutils commit: ${binutils_url}"
 } > /tmp/release_desc
 
 touch /tmp/telegram_post
 {
-    echo -e "<b>New Update for Greenforce Clang is Available!</b>\n"
+    echo -e "<b>New Greenforce Clang Update is Available!</b>\n"
     echo "<b>Host system details</b>"
     echo "<b>Distro:</b> <code>${distro_image}</code>"
     echo "<b>Glibc version:</b> <code>${glibc_version}</code>"
     echo -e "<b>Clang version:</b> <code>${dclang_version}</code>\n"
     echo "<b>Toolchain details</b>"
     echo "<b>Clang version:</b> <code>${short_clang}</code>"
-    echo "<b>LD version:</b> <code>${ld_version}</code>"
     echo "<b>Binutils version:</b> <code>${binutils_version}</code>"
-    echo "<b>Binutils commit:</b> <a href='${binutils_url}'>${bcommit_message}</a>"
+    echo "<b>LD version:</b> <code>${ld_version}</code>"
     echo "<b>LLVM commit:</b> <a href='${llvm_url}'>${lcommit_message}</a>"
+    echo -e "<b>Binutils commit:</b> <a href='${binutils_url}'>${bcommit_message}</a>\n"
     echo "<b>Build Date:</b> <code>$(date +'%Y-%m-%d (%H:%M)')</code>"
-    echo -e "<b>Build Tag:</b> <code>${release_tag}</code>\n"
+    echo "<b>Build Tag:</b> <code>${release_tag}</code>"
     echo "<b>Build Release:</b> <a href='${release_url}'>${release_file}</a> (${release_size})"
 } > /tmp/telegram_post
 

@@ -17,10 +17,10 @@ kecho "Building Clang LLVM (step: ${1})..."
         --install-folder "${install_path}" \
         --install-target distribution \
         --projects clang lld \
+        --llvm-folder "${DIR}/src/llvm-project" \
         --lto thin \
         --pgo llvm \
         --quiet-cmake \
-        --no-update \
         --targets ARM AArch64 X86 \
         --vendor-string "greenforce" 2>&1 | tee "${llvm_log}"
 

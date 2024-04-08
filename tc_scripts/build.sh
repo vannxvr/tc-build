@@ -110,7 +110,7 @@ if [[ "${1}" == final ]]; then
 
     # Push the commits and releases
     pushd "${DIR}/greenforce_clang" || exit 1
-    ./tc_scripts/info.sh
+    bash "${DIR}/tc_scripts/info.sh"
     git add .
     git commit -s -m "$(cat /tmp/commit_desc)"
     git push "https://${ghuser_name}:${GITHUB_TOKEN}@github.com/greenforce-project/greenforce_clang" main -f

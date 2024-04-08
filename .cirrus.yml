@@ -21,8 +21,7 @@ cloning_task:
     - git clone --single-branch https://sourceware.org/git/binutils-gdb.git -b master src/binutils-master --depth=1
     - git clone --single-branch https://github.com/llvm/llvm-project.git -b main src/llvm-project --depth=1
   profdata_cache:
-    folder: src/binutils-master
-    folder: src/llvm-project
+    folder: src
     fingerprint_key: $CIRRUS_BUILD_ID
 
 profile_task:
@@ -32,15 +31,13 @@ profile_task:
   skip: "!changesInclude('build-datestamp')"
   timeout_in: 120m
   only_if: $CIRRUS_BRANCH == 'main'
-  script:
-    - chmod +x tc_scripts/*
-    - ./tc_scripts/init.sh profile
-    - find build/llvm/instrumented -type f ! -name 'profdata.prof' -delete
   profdata_cache:
     folder: build/llvm/instrumented
-    folder: src/binutils-master
-    folder: src/llvm-project
+    folder: src
     fingerprint_key: $CIRRUS_BUILD_ID
+  script:
+    - ./tc_scripts/init.sh profile
+    - find build/llvm/instrumented -type f ! -name 'profdata.prof' -delete
 
 final_task:
   depends_on:
@@ -51,9 +48,7 @@ final_task:
   only_if: $CIRRUS_BRANCH == 'main'
   profdata_cache:
     folder: build/llvm/instrumented
-    folder: src/binutils-master
-    folder: src/llvm-project
+    folder: src
     fingerprint_key: $CIRRUS_BUILD_ID
   script:
-    - chmod +x tc_scripts/*
     - ./tc_scripts/init.sh final

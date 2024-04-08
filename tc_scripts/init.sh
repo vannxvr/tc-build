@@ -11,7 +11,7 @@ source "${DIR}/tc_scripts/helper.sh"
 # Specify the build flags for the scripts
 if [[ "${1}" == final ]]; then
     export build_flags="--final"
-elif [[ ( "${1}" != profile || "${1}" != final ) ]]; then
+elif ! [[ "${1}" == profile || "${1}" == final ]]; then
     kerror "You need to set the correct arguments!"
     exit 1
 fi

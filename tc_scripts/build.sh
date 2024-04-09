@@ -93,7 +93,7 @@ if [[ "${1}" == final ]]; then
     export binutils_version="$(ls ${DIR}/src/ | grep "^binutils-" | sed "s/binutils-//g")"
     export ld_version="$(${install_path}/aarch64-linux-gnu/bin/ld --version | head -n1)"
     export release_file="greenforce-clang-${short_clang}-${release_tag}-${release_time}.tar.zst"
-    export release_info="clang-${short_clang}-${release_tag}-${release_time}-info.txt"
+    export release_info="${short_clang}-${release_tag}-info.txt"
     export release_url="https://github.com/greenforce-project/greenforce_clang/releases/download/${release_tag}/${release_file}"
     export README_path="${DIR}/greenforce_clang/README.md"
 

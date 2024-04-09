@@ -98,10 +98,8 @@ if [[ "${1}" == final ]]; then
     export README_path="${DIR}/greenforce_clang/README.md"
 
     # Package the final Clang release file
-    wget https://raw.githubusercontent.com/greenforce-project/tc-build/backup/build_scripts/zstd
-    chmod +x zstd
     pushd "${install_path}" || exit 1
-    tar -I'../zstd --ultra -22 -T0' -cf "${release_file}" ./*
+    tar -I'zstd --ultra -22 -T0' -cf "${release_file}" ./*
     popd || exit 1
 
     export release_path="${install_path}/${release_file}"

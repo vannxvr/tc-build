@@ -33,22 +33,6 @@ for clang in "${install_path}"/bin/clang; do
 done
 
 if [[ "${1}" == final ]]; then
-    # Build binutils
-    kecho "Building binutils..."
-    export binutils_log="${DIR}/build-binutils-${release_tag}.log"
-    ./build-binutils.py \
-        --install-folder "${install_path}" \
-        --binutils-folder "${DIR}/src/binutils-master" \
-        --targets arm aarch64 2>&1 | tee "${binutils_log}"
-
-    for binutils in "${install_path}"/aarch64-linux-gnu/bin/ld; do
-        if ! [[ -f "${binutils}" ]]; then
-            kerror "Building binutils failed kindly check errors!"
-            telegram_file "${binutils_log}" "Here is the binutils error log."
-            exit 1
-        fi
-    done
-
     # Remove unused products
     rm -rf "${install_path}/include" "${install_path}/lib/cmake"
     rm -f "${install_path}"/lib/*.a "${install_path}"/lib/*.la
@@ -85,13 +69,7 @@ if [[ "${1}" == final ]]; then
     export llvm_url="https://github.com/llvm/llvm-project/commit/${llvm_hash}"
     export clang_version="$(${install_path}/bin/clang --version | head -n1)"
     export short_clang="$(echo ${clang_version} | cut -d' ' -f4)"
-    pushd "${DIR}/src/binutils-master" || exit 1
-    export bcommit_message="$(git log --pretty='format:%s' | head -n1)"
-    export binutils_hash="$(git rev-parse --verify HEAD)"
-    popd || exit 1
-    export binutils_url="https://github.com/bminor/binutils-gdb/commit/${binutils_hash}"
-    export binutils_version="$(ls ${DIR}/src/ | grep "^binutils-" | sed "s/binutils-//g")"
-    export ld_version="$(${install_path}/aarch64-linux-gnu/bin/ld --version | head -n1)"
+    export lld_version="$(${install_path}/bin/ld.lld --version | head -n1)"
     export release_file="greenforce-clang-${short_clang}-${release_tag}-${release_time}.tar.zst"
     export release_info="${short_clang}-${release_tag}-info.txt"
     export release_url="https://github.com/greenforce-project/greenforce_clang/releases/download/${release_tag}/${release_file}"

@@ -13,12 +13,9 @@ touch "${release_info}"
 {
     echo -e "[date]\n${release_date}\n"
     echo -e "[clang-ver]\n${clang_version}\n"
+    echo -e "[lld-ver]\n${lld_version}\n"
     echo -e "[llvm-commit]\n${llvm_url}\n"
     echo -e "[llvm-commit-msg]\n${lcommit_message}\n"
-    echo -e "[binutils-ver]\n${binutils_version}\n"
-    echo -e "[binutils-commit]\n${binutils_url}\n"
-    echo -e "[binutils-commit-msg]\n${bcommit_message}\n"
-    echo -e "[ld-ver]\n${ld_version}\n"
     echo -e "[host-glibc]\n${glibc_version}\n"
     echo -e "[size]\n${release_size}\n"
     echo -e "[shasum]\n${release_shasum}"
@@ -29,18 +26,15 @@ touch /tmp/commit_desc
     echo -e "[Scheduled]: Update LLVM from commit ${llvm_hash}\n"
     echo "Tag: ${release_tag}"
     echo "Clang Version: ${short_clang}"
-    echo "Binutils version: ${binutils_version}"
-    echo -e "LD Version: ${ld_version}\n"
+    echo -e "LLD Version: ${lld_version}\n"
     echo "Link: https://github.com/greenforce-project/greenforce_clang/releases/tag/${release_tag}"
 } > /tmp/commit_desc
 
 touch /tmp/release_desc
 {
     echo "Clang Version: ${short_clang}"
-    echo "Binutils version: ${binutils_version}"
-    echo -e "LD Version: ${ld_version}\n"
+    echo -e "LLD Version: ${lld_version}\n"
     echo "LLVM commit: ${llvm_url}"
-    echo "Binutils commit: ${binutils_url}"
 } > /tmp/release_desc
 
 touch /tmp/telegram_post
@@ -52,10 +46,8 @@ touch /tmp/telegram_post
     echo -e "<b>Clang version:</b> <code>${dclang_version}</code>\n"
     echo "<b>Toolchain details</b>"
     echo "<b>Clang version:</b> <code>${short_clang}</code>"
-    echo "<b>Binutils version:</b> <code>${binutils_version}</code>"
-    echo "<b>LD version:</b> <code>${ld_version}</code>"
-    echo "<b>LLVM commit:</b> <a href='${llvm_url}'>${lcommit_message}</a>"
-    echo -e "<b>Binutils commit:</b> <a href='${binutils_url}'>${bcommit_message}</a>\n"
+    echo "<b>LLD version:</b> <code>${lld_version}</code>"
+    echo -e "<b>LLVM commit:</b> <a href='${llvm_url}'>${lcommit_message}</a>\n"
     echo "<b>Build Date:</b> <code>$(date +'%Y-%m-%d (%H:%M)')</code>"
     echo "<b>Build Tag:</b> <code>${release_tag}</code>"
     echo "<b>Build Release:</b> <a href='${release_url}'>${release_file}</a> (${release_size})"
@@ -78,16 +70,15 @@ touch "${README_path}"
     echo -e "## Building Linux\n"
     echo -e "This is how you start initializing the Greenforce Clang to your server, use a command like this:\n"
     echo -e '```bash'
-    echo -e "wget -c ${release_url} -O - | tar --use-compress-program=unzstd -xf - -C /path/to/folder\n"
+    echo -e "wget -c ${release_url} -O - | tar --use-compress-program=unzstd -xf - -C ~/greenforce-clang\n"
     echo -e '```\n'
     echo -e 'Make sure you have this toolchain in your `PATH`:\n'
     echo -e '```bash\n'
-    echo -e 'export PATH="/path/to/folder/bin:$PATH"\n'
+    echo -e 'export PATH="~/greenforce-clang/bin:${PATH}"\n'
     echo -e '```\n'
     echo -e 'For an AArch64 cross-compilation setup, you must set the following variables. Some of them can be environment variables, but some must be passed directly to `make` as a command-line argument. It is recommended to pass **all** of them as `make` arguments to avoid confusing errors:\n'
     echo -e '- `CC=clang` (must be passed directly to `make`)'
-    echo -e '- `CROSS_COMPILE=aarch64-linux-gnu-`'
-    echo -e '- If your kernel has a 32-bit vDSO: `CROSS_COMPILE_ARM32=arm-linux-gnueabi-`\n'
+    echo -e '- Now GCC/binutils are separate. Set `CROSS_COMPILE` and `CROSS_COMPILE_ARM32` (if your kernel has a 32-bit vDSO) according to the toolchain you have.\n'
     echo -e 'Optionally, you can also choose to use as many LLVM tools as possible to reduce reliance on binutils. All of these must be passed directly to `make`:\n'
     echo -e '- `AR=llvm-ar`'
     echo -e '- `NM=llvm-nm`'
@@ -101,7 +92,6 @@ touch "${README_path}"
     echo -e "Greenforce Clang has been designed to be easy-to-use compared to other toolchains, such as [AOSP Clang](https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/). The differences are as follows:\n"
     echo -e '- `CLANG_TRIPLE` does not need to be set because we dont use AOSP binutils.'
     echo -e '- `LD_LIBRARY_PATH` does not need to be set because we set library load paths in the toolchain.'
-    echo -e "- No separate GCC/binutils toolchains are necessary; all tools are bundled."
 } > "${README_path}"
 
 # Fixing typos and grammar

@@ -46,7 +46,6 @@ export lld_version="$(${install_path}/bin/ld.lld --version | head -n1)"
 export release_file="greenforce-clang-${short_clang}-${release_tag}-${release_time}.tar.zst"
 export release_info="${short_clang}-${release_tag}-info.txt"
 export release_url="https://github.com/greenforce-project/greenforce_clang/releases/download/${release_tag}/${release_file}"
-export README_path="${DIR}/greenforce_clang/README.md"
 
 # Package the final Clang release file
 pushd "${install_path}" || exit 1

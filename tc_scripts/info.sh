@@ -3,7 +3,7 @@
 # Copyright (C) 2023-2024 fadlyas07 <mhmmdfdlyas@proton.me>
 
 # Remove existing files
-rm -rf "${README_path}" latest*
+rm -rf README.md latest*
 
 # Create latest.txt and populate it with release tag
 echo -e "[tag]\n${release_tag}" > latest.txt
@@ -62,7 +62,7 @@ touch latest_url.txt
 } > latest_url.txt
 
 # Create README.md file and populate it with content
-touch "${README_path}"
+touch README.md
 {
     echo -e "# Greenforce Clang\n"
     echo -e "## Host compatibility\n"
@@ -92,8 +92,8 @@ touch "${README_path}"
     echo -e "Greenforce Clang has been designed to be easy-to-use compared to other toolchains, such as [AOSP Clang](https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/). The differences are as follows:\n"
     echo -e '- `CLANG_TRIPLE` does not need to be set because we dont use AOSP binutils.'
     echo -e '- `LD_LIBRARY_PATH` does not need to be set because we set library load paths in the toolchain.'
-} > "${README_path}"
+} > README.md
 
 # Fixing typos and grammar
-sed -i "s/Clangs/Clang's/g" "${README_path}"
-sed -i "s/dont/don't/g" "${README_path}"
+sed -i "s/Clangs/Clang's/g" README.md
+sed -i "s/dont/don't/g" README.md

@@ -77,7 +77,7 @@ if [[ "${1}" == final ]]; then
 
     # Package the final Clang release file
     pushd "${install_path}" || exit 1
-    tar -I'zstd --ultra -22 -T0' -cf "${release_file}" ./*
+    tar -I'zstd --ultra -19 -T0' -cf "${release_file}" ./*
     popd || exit 1
 
     export release_path="${install_path}/${release_file}"

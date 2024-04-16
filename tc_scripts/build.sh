@@ -9,20 +9,20 @@ source "${DIR}/tc_scripts/helper.sh"
 export llvm_log="${DIR}/build-llvm-${release_tag}.log"
 kecho "Building Clang LLVM (step: ${1})..."
 ./build-llvm.py ${build_flags} \
-        --assertions \
-        --build-stage1-only \
-        --build-target distribution \
-        --bolt \
-        --defines LLVM_PARALLEL_COMPILE_JOBS=$(nproc --all) LLVM_PARALLEL_LINK_JOBS=$(nproc --all) \
-        --install-folder "${install_path}" \
-        --install-target distribution \
-        --projects clang lld \
-        --llvm-folder "${DIR}/src/llvm-project" \
-        --lto thin \
-        --pgo llvm \
-        --quiet-cmake \
-        --targets ARM AArch64 X86 \
-        --vendor-string "greenforce" 2>&1 | tee "${llvm_log}"
+    --assertions \
+    --build-stage1-only \
+    --build-target distribution \
+    --bolt \
+    --defines LLVM_PARALLEL_COMPILE_JOBS=$(nproc --all) LLVM_PARALLEL_LINK_JOBS=$(nproc --all) \
+    --install-folder "${install_path}" \
+    --install-target distribution \
+    --projects clang lld \
+    --llvm-folder "${DIR}/src/llvm-project" \
+    --lto thin \
+    --pgo llvm \
+    --quiet-cmake \
+    --targets ARM AArch64 X86 \
+    --vendor-string "greenforce" 2>&1 | tee "${llvm_log}"
 
 for clang in "${install_path}"/bin/clang; do
     if ! [[ -f "${clang}" || -f "${DIR}/build/llvm/instrumented/profdata.prof" ]]; then

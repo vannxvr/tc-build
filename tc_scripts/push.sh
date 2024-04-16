@@ -27,11 +27,11 @@ done
 # Clone the catalogue repository
 if ! pushd "${DIR}/greenforce_clang"; then
     git clone --single-branch -b main "https://${ghuser_name}:${GITHUB_TOKEN}@github.com/greenforce-project/greenforce_clang" --depth=1 ||
-    {
-        kecho "Failed to clone the catalogue repository!"
-        kecho "Please check your server; it's likely that the repository exists."
-        exit 1
-    }
+        {
+            kecho "Failed to clone the catalogue repository!"
+            kecho "Please check your server; it's likely that the repository exists."
+            exit 1
+        }
 fi
 
 # GitHub push environment
@@ -65,14 +65,14 @@ git push "https://${ghuser_name}:${GITHUB_TOKEN}@github.com/greenforce-project/g
 
 if gh release view "${release_tag}"; then
     gh release upload --clobber "${release_tag}" "${release_path}" &&
-    {
-        kecho "Version ${release_tag} updated!"
-    }
+        {
+            kecho "Version ${release_tag} updated!"
+        }
 else
     gh release create "${release_tag}" -F /tmp/release_desc "${release_path}" -t "${release_date}" &&
-    {
-        kecho "Version ${release_tag} released!"
-    }
+        {
+            kecho "Version ${release_tag} released!"
+        }
 fi
 
 git push "https://${ghuser_name}:${GITHUB_TOKEN}@github.com/greenforce-project/greenforce_clang" main -f

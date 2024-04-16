@@ -6,7 +6,7 @@
 rm -rf README.md latest*
 
 # Create latest.txt and populate it with release tag
-echo -e "[tag]\n${release_tag}" > latest.txt
+echo -e "[tag]\n${release_tag}" >latest.txt
 
 # Create release info file and populate it with release information
 touch "${release_info}"
@@ -19,7 +19,7 @@ touch "${release_info}"
     echo -e "[host-glibc]\n${glibc_version}\n"
     echo -e "[size]\n${release_size}\n"
     echo -e "[shasum]\n${release_shasum}"
-} > "${release_info}"
+} >"${release_info}"
 
 touch /tmp/commit_desc
 {
@@ -28,14 +28,14 @@ touch /tmp/commit_desc
     echo "Clang Version: ${short_clang}"
     echo -e "LLD Version: ${lld_version}\n"
     echo "Link: https://github.com/greenforce-project/greenforce_clang/releases/tag/${release_tag}"
-} > /tmp/commit_desc
+} >/tmp/commit_desc
 
 touch /tmp/release_desc
 {
     echo "Clang Version: ${short_clang}"
     echo -e "LLD Version: ${lld_version}\n"
     echo "LLVM commit: ${llvm_url}"
-} > /tmp/release_desc
+} >/tmp/release_desc
 
 touch /tmp/telegram_post
 {
@@ -51,7 +51,7 @@ touch /tmp/telegram_post
     echo "<b>Build Date:</b> <code>$(date +'%Y-%m-%d (%H:%M)')</code>"
     echo "<b>Build Tag:</b> <code>${release_tag}</code>"
     echo "<b>Build Release:</b> <a href='${release_url}'>${release_file}</a> (${release_size})"
-} > /tmp/telegram_post
+} >/tmp/telegram_post
 
 touch latest_url.txt
 {
@@ -59,7 +59,7 @@ touch latest_url.txt
     echo "# This file provides the link to the latest successfully compiled Greenforce Clang ${short_clang}."
     echo -e "# It serves as a reference for accessing the most recent version of Clang for use in various projects.\n"
     echo "latest_url=${release_url}"
-} > latest_url.txt
+} >latest_url.txt
 
 # Create README.md file and populate it with content
 touch README.md
@@ -101,7 +101,7 @@ touch README.md
     echo -e "Greenforce Clang has been designed to be easy-to-use compared to other toolchains, such as [AOSP Clang](https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/). The differences are as follows:\n"
     echo -e '- `CLANG_TRIPLE` does not need to be set because we dont use AOSP binutils.'
     echo -e '- `LD_LIBRARY_PATH` does not need to be set because we set library load paths in the toolchain.'
-} > README.md
+} >README.md
 
 # Fixing typos and grammar
 sed -i "s/Clangs/Clang's/g" README.md

@@ -16,7 +16,7 @@ kecho "Building Clang LLVM (step: ${1})..."
     --defines LLVM_PARALLEL_COMPILE_JOBS=$(nproc --all) LLVM_PARALLEL_LINK_JOBS=$(nproc --all) CMAKE_C_FLAGS="-O2" CMAKE_CXX_FLAGS="-O2" \
     --install-folder "${install_path}" \
     --install-target distribution \
-    --projects clang lld \
+    --projects clang compiler-rt lld polly \
     --llvm-folder "${DIR}/src/llvm-project" \
     --lto thin \
     --pgo llvm \

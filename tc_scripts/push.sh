@@ -54,7 +54,7 @@ popd || exit 1
 
 export release_path="${install_path}/${release_file}"
 export release_shasum="$(sha256sum "${release_path}" | awk '{print $1}')"
-export release_size="$(du -sh "${release_path}" | awk '{print $1}')"
+export release_size="$(du -sh "${release_path}" | awk '{print $1}')b"
 
 # Push the commits and releases
 pushd "${DIR}/greenforce_clang" || exit 1

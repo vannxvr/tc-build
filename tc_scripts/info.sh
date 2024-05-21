@@ -39,12 +39,7 @@ touch /tmp/release_desc
 
 touch /tmp/telegram_post
 {
-    echo -e "<b>New Greenforce Clang Update is Available!</b>\n"
-    echo "<b>Host system details</b>"
-    echo "<b>Distro:</b> <code>${distro_image}</code>"
-    echo "<b>Glibc version:</b> <code>${glibc_version}</code>"
-    echo -e "<b>Clang version:</b> <code>${dclang_version}</code>\n"
-    echo "<b>Toolchain details</b>"
+    echo "<b>New Greenforce Clang Update is Available!</b>"
     echo "<b>Clang version:</b> <code>${short_clang}</code>"
     echo "<b>LLD version:</b> <code>${lld_version}</code>"
     echo -e "<b>LLVM commit:</b> <a href='${llvm_url}'>${lcommit_message}</a>\n"

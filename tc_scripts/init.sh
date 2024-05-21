@@ -30,9 +30,6 @@ export release_tag="$(date +'%d%m%Y')"     # "{date}{month}{year}" format
 export release_time="$(date +'%H%M')"      # HoursMinute
 export release_date="$(date +'%-d %B %Y')" # "Day Month Year" format
 export install_path="${DIR}/install"
-export distro_image="$(source /etc/os-release && echo ${PRETTY_NAME})"
-export glibc_version="$(ldd --version | head -n1 | grep -oE '[^ ]+$')"
-export dclang_version="$(clang --version | head -n1 | grep -oE '[^ ]+$')"
 
 # Execute the build scripts
 ./tc_scripts/build.sh "${1}"

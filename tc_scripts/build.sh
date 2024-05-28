@@ -27,7 +27,6 @@ kecho "Building Clang LLVM (step: ${1})..."
 for clang in "${install_path}"/bin/clang; do
     if ! [[ -f "${clang}" || -f "${DIR}/build/llvm/instrumented/profdata.prof" ]]; then
         kerror "Building Clang LLVM failed kindly check errors!"
-        telegram_file "${llvm_log}" "Here is the LLVM error log."
         exit 1
     fi
 done

@@ -37,17 +37,6 @@ touch /tmp/release_desc
     echo "LLVM commit: ${llvm_url}"
 } >/tmp/release_desc
 
-touch /tmp/telegram_post
-{
-    echo "<b>New Greenforce Clang Update is Available!</b>"
-    echo "<b>Clang version:</b> <code>${short_clang}</code>"
-    echo "<b>LLD version:</b> <code>${lld_version}</code>"
-    echo -e "<b>LLVM commit:</b> <a href='${llvm_url}'>${lcommit_message}</a>\n"
-    echo "<b>Build Date:</b> <code>$(date +'%Y-%m-%d (%H:%M)')</code>"
-    echo "<b>Build Tag:</b> <code>${release_tag}</code>"
-    echo "<b>Build Release:</b> <a href='${release_url}'>${release_file}</a> (${release_size})"
-} >/tmp/telegram_post
-
 touch latest_url.txt
 {
     echo "# Latest Clang Link"

@@ -77,4 +77,3 @@ fi
 
 git push "https://${ghuser_name}:${GITHUB_TOKEN}@github.com/greenforce-project/greenforce_clang" main -f
 popd || exit 1
-telegram_message "$(cat /tmp/telegram_post)"

@@ -5,14 +5,11 @@
 # Working directory
 export DIR="$(pwd)"
 
-# Inherit common function
-source "${DIR}/tc_scripts/helper.sh"
-
 # Specify the build flags for the scripts
 if [[ "${1}" == final ]]; then
     export build_flags="--final"
 elif ! [[ "${1}" == profile || "${1}" == final ]]; then
-    kerror "You need to set the correct arguments!"
+    echo "You need to set the correct arguments!"
     exit 1
 fi
 
@@ -27,7 +24,6 @@ chmod u+x ~/.git/hooks/commit-msg
 # Export common environment variables
 export PATH="/usr/bin/core_perl:${PATH}"
 export release_tag="$(date +'%d%m%Y')"     # "{date}{month}{year}" format
-export release_time="$(date +'%H%M')"      # HoursMinute
 export release_date="$(date +'%-d %B %Y')" # "Day Month Year" format
 export install_path="${DIR}/install"
 

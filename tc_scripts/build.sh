@@ -2,18 +2,16 @@
 # ---- Clang Build Scripts ----
 # Copyright (C) 2023-2024 fadlyas07 <mhmmdfdlyas@proton.me>
 
-# Inherit common function
-source "${DIR}/tc_scripts/helper.sh"
-
 # Build LLVM
 export llvm_log="${DIR}/build-llvm-${release_tag}.log"
-kecho "Building Clang LLVM (step: ${1})..."
+nproc="$(nproc --all)"
+echo "Building Clang LLVM (step: ${1})..."
 ./build-llvm.py ${build_flags} \
     --assertions \
     --build-stage1-only \
     --build-target distribution \
     --bolt \
-    --defines LLVM_PARALLEL_COMPILE_JOBS=$(nproc --all) LLVM_PARALLEL_LINK_JOBS=$(nproc --all) CMAKE_C_FLAGS="-O2" CMAKE_CXX_FLAGS="-O2" \
+    --defines LLVM_PARALLEL_COMPILE_JOBS="${nproc}" LLVM_PARALLEL_LINK_JOBS="${nproc}" CMAKE_C_FLAGS="-O2" CMAKE_CXX_FLAGS="-O2" \
     --install-folder "${install_path}" \
     --install-target distribution \
     --projects clang compiler-rt lld polly \
@@ -26,7 +24,7 @@ kecho "Building Clang LLVM (step: ${1})..."
 
 for clang in "${install_path}"/bin/clang; do
     if ! [[ -f "${clang}" || -f "${DIR}/build/llvm/instrumented/profdata.prof" ]]; then
-        kerror "Building Clang LLVM failed kindly check errors!"
+        echo "Building Clang LLVM failed kindly check errors!"
         exit 1
     fi
 done

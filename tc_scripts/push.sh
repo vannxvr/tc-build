@@ -40,9 +40,9 @@ popd || exit 1
 
 # Package the final Clang release file
 pushd "${install_path}" || exit 1
-export clang_version="$(bin/clang --version | head -n1 | sed 's/[[:space:]]*$//')"
+export clang_version="$(bin/clang --version | head -n1)"
 export short_clang="$(echo ${clang_version} | cut -d' ' -f4)"
-export lld_version="$(bin/ld.lld --version | head -n1 | sed 's/(compatible with [^)]*)//' | sed 's/[[:space:]]*$//')"
+export lld_version="$(bin/ld.lld --version | head -n1)"
 export release_file="greenforce-clang-${short_clang}-${release_tag}.tar.zst"
 tar -I 'zstd --ultra -19 -T0' -cf "${release_file}" ./*
 export release_shasum="$(sha256sum "${release_file}" | awk '{print $1}')"

@@ -44,7 +44,7 @@ export clang_version="$(bin/clang --version | head -n1)"
 export short_clang="$(echo ${clang_version} | cut -d' ' -f4)"
 export lld_version="$(bin/ld.lld --version | head -n1)"
 export release_file="greenforce-clang-${short_clang}-${release_tag}.tar.zst"
-tar -I 'zstd --ultra -22 -T0' -cf "${release_file}" ./*
+tar -I 'zstd --ultra -5 -T0' -cf "${release_file}" ./*
 export release_shasum="$(sha256sum "${release_file}" | awk '{print $1}')"
 export release_size="$(du -sh "${release_file}" | awk '{print $1}')b"
 popd || exit 1

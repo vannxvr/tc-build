@@ -41,7 +41,7 @@ popd || exit 1
 # Package the final Clang release file
 pushd "${install_path}" || exit 1
 export clang_version="$(bin/clang --version | head -n1)"
-export short_clang="$(echo ${clang_version} | cut -d' ' -f4)"
+export short_clang="$(echo ${clang_version} | cut -d' ' -f3)"
 export lld_version="$(bin/ld.lld --version | head -n1)"
 export release_file="greenforce-clang-${short_clang}-${release_tag}.tar.zst"
 tar -I 'zstd --ultra -5 -T0' -cf "${release_file}" ./*

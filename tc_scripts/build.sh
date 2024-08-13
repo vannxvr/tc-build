@@ -6,7 +6,6 @@
 export llvm_log="${DIR}/build-llvm-${release_tag}.log"
 nproc="$(nproc --all)"
 ./build-llvm.py ${build_flags} \
-    --assertions \
     --build-stage1-only \
     --build-target distribution \
     --bolt \

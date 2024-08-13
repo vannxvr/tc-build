@@ -18,7 +18,7 @@ mkdir -p ~/.git/hooks
 git config --global user.name "${ghuser_name}"
 git config --global user.email "${ghuser_email}"
 git config --global core.hooksPath ~/.git/hooks
-curl -Lo ~/.git/hooks/commit-msg https://review.lineageos.org/tools/hooks/commit-msg
+curl -s -Lo ~/.git/hooks/commit-msg https://review.lineageos.org/tools/hooks/commit-msg
 chmod u+x ~/.git/hooks/commit-msg
 
 # Export common environment variables

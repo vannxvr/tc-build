@@ -5,7 +5,6 @@
 # Build LLVM
 export llvm_log="${DIR}/build-llvm-${release_tag}.log"
 nproc="$(nproc --all)"
-echo "Building Clang LLVM (step: ${1})..."
 ./build-llvm.py ${build_flags} \
     --assertions \
     --build-stage1-only \

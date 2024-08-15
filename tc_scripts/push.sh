@@ -11,14 +11,14 @@ done
 
 # Strip remaining products
 find "${install_path}" -type f -exec file {} \; | grep 'not stripped' | awk '{print $1}' | while read -r f; do
-    strip -s "${f::-1}"
+    strip -s "${f}"
 done
 
 # Set executable rpaths so setting LD_LIBRARY_PATH isn't necessary
-find "${install_path}" -mindepth 2 -maxdepth 3 -type f -exec file {} \; | grep 'ELF .* interpreter' | awk '{print $1}' | while read -r bin; do
+find "${install_path}" -mindepth 2 -maxdepth 3 -type f -exec file {} \; | grep 'ELF .* interpreter' | awk -F: '{print $1}' | while read -r bin; do
     # Remove last character from file output (':')
-    bin="${bin::-1}"
-    patchelf --set-rpath "${install_path}/lib" "${bin}"
+    bin="${bin% }"
+    patchelf --set-rpath "${install_path}/bin/../lib" "${bin}"
 done
 
 # Clone the catalogue repository

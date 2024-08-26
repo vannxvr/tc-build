@@ -6,6 +6,7 @@
 export llvm_log="${DIR}/build-llvm-${release_tag}.log"
 ./build-llvm.py ${build_flags} \
     --assertions \
+    --bolt \
     --build-stage1-only \
     --build-target distribution \
     --install-folder "${install_path}" \

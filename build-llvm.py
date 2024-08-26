@@ -411,7 +411,8 @@ parser.add_argument('--vendor-string',
                     override this and have no vendor in the version string.
 
                     '''),
-                    type=str)
+                    type=str,
+                    default='ClangBuiltLinux')
 args = parser.parse_args()
 
 # Start tracking time that the script takes

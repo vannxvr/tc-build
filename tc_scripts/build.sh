@@ -9,7 +9,7 @@ nproc="$(nproc --all)"
     --build-stage1-only \
     --build-target distribution \
     --bolt \
-    --defines LLVM_PARALLEL_COMPILE_JOBS="${nproc}" LLVM_PARALLEL_LINK_JOBS="${nproc}" CMAKE_C_FLAGS="-O2" CMAKE_CXX_FLAGS="-O2" \
+    --defines LLVM_OPTIMIZED_TABLEGEN=ON LLVM_PARALLEL_COMPILE_JOBS="${nproc}" LLVM_PARALLEL_LINK_JOBS="${nproc}" LLVM_PARALLEL_TABLEGEN_JOBS="${nproc}" CMAKE_C_FLAGS="-O2" CMAKE_CXX_FLAGS="-O2" \
     --install-folder "${install_path}" \
     --install-target distribution \
     --projects clang compiler-rt lld polly \

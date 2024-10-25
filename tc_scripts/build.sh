@@ -12,7 +12,6 @@ export llvm_log="${DIR}/build-llvm-${release_tag}.log"
     --install-target distribution \
     --projects clang lld \
     --llvm-folder "${DIR}/src/llvm-project" \
-    --lto thin \
     --pgo llvm \
     --quiet-cmake \
     --targets ARM AArch64 X86 \

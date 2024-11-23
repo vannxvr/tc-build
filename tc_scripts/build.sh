@@ -10,7 +10,7 @@ export llvm_log="${DIR}/build-llvm-${release_tag}.log"
     --build-target distribution \
     --install-folder "${install_path}" \
     --install-target distribution \
-    --projects clang lld \
+    --projects clang lld polly \
     --llvm-folder "${DIR}/src/llvm-project" \
     --lto thin \
     --pgo llvm \

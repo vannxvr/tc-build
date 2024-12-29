@@ -18,7 +18,7 @@ cpu_core="$(nproc --all)"
     --pgo llvm \
     --quiet-cmake \
     --targets ARM AArch64 X86 \
-    --vendor-string "gf" 2>&1 | tee "${llvm_log}"
+    --vendor-string "greenforce" 2>&1 | tee "${llvm_log}"
 
 for clang in "${install_path}"/bin/clang; do
     if ! [[ -f "${clang}" || -f "${DIR}/build/llvm/instrumented/profdata.prof" ]]; then

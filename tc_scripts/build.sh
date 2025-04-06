@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ---- Clang Build Scripts ----
-# Copyright (C) 2023-2024 fadlyas07 <mhmmdfdlyas@proton.me>
+# Copyright (C) 2023-2025 fadlyas07 <mhmmdfdlyas@proton.me>
 
 # Build LLVM
 export llvm_log="${DIR}/build-llvm-${release_tag}.log"

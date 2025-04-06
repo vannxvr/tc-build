@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ---- Clang Build Scripts ----
-# Copyright (C) 2023-2024 fadlyas07 <mhmmdfdlyas@proton.me>
+# Copyright (C) 2023-2025 fadlyas07 <mhmmdfdlyas@proton.me>
 
 # Working directory
 export DIR="$(pwd)"

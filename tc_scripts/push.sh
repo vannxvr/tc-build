@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ---- Clang Build Scripts ----
-# Copyright (C) 2023-2024 fadlyas07 <mhmmdfdlyas@proton.me>
+# Copyright (C) 2023-2025 fadlyas07 <mhmmdfdlyas@proton.me>
 
 # Remove unused products
 rm -rf "${install_path}/include" "${install_path}/lib/cmake"

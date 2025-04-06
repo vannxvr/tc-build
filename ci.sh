@@ -34,6 +34,9 @@ function do_deps() {
     # We only run this when running on GitHub Actions
     [[ -z ${GITHUB_ACTIONS:-} ]] && return 0
 
+    # Refresh mirrorlist to avoid dead mirrors
+    sudo apt-get update -y
+
     sudo apt-get install -y --no-install-recommends \
         bc \
         bison \
@@ -101,7 +104,7 @@ function do_llvm() {
         --install-target distribution \
         --projects clang lld \
         --quiet-cmake \
-        --ref release/19.x \
+        --ref release/20.x \
         --shallow-clone \
         --show-build-commands \
         --targets X86 \

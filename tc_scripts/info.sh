@@ -24,7 +24,6 @@ touch /tmp/commit_msg
 {
     echo -e "CI: Bump to ${release_tag} build\n"
     echo "Clang version: ${clang_version}"
-    echo "LLD version: ${lld_version}"
     echo "LLVM repo commit: ${lcommit_message}"
     echo "Link: ${llvm_url}"
 } >/tmp/commit_msg

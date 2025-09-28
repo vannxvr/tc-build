@@ -3,7 +3,7 @@
 # Copyright (C) 2023-2025 fadlyas07 <mhmmdfdlyas@proton.me>
 
 echo -e "[tag]\n${release_tag}" >latest.txt
-release_url="https://github.com/greenforce-project/greenforce_clang/releases/download/${release_tag}/${release_file}"
+release_url="https://github.com/xaverodumpster/dv_clang/releases/download/${release_tag}/${release_file}"
 touch "clang_notes.txt"
 {
     echo -e "[date]\n${release_date}\n"

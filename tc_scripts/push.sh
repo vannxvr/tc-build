@@ -22,8 +22,8 @@ find "${install_path}" -mindepth 2 -maxdepth 3 -type f -exec file {} \; | grep '
 done
 
 # Clone the catalogue repository
-if ! pushd "${DIR}/greenforce_clang"; then
-    git clone --single-branch -b main "https://${ghuser_name}:${GITHUB_TOKEN}@github.com/greenforce-project/greenforce_clang" --depth=1 ||
+if ! pushd "${DIR}/dv_clang"; then
+    git clone --single-branch -b main "https://${ghuser_name}:${GITHUB_TOKEN}@github.com/xaverodumpster/dv_clang" --depth=1 ||
         {
             echo "Failed to clone the catalogue repository!"
             echo "Please check your server; it's likely that the repository exists."
@@ -43,7 +43,7 @@ pushd "${install_path}" || exit 1
 export clang_version="$(bin/clang --version | head -n1)"
 export short_clang="$(echo ${clang_version} | cut -d' ' -f4)"
 export lld_version="$(bin/ld.lld --version | head -n1)"
-export release_file="greenforce-clang-${short_clang}-${release_tag}.tar"
+export release_file="DiscussionVerse-Clang-${short_clang}-${release_tag}.tar"
 tar -czf "${release_file}.gz" --exclude='*.tar.xz' ./*
 tar -cJf "${release_file}.xz" --exclude='*.tar.gz' ./*
 export release_shasumg="$(sha256sum "${release_file}.gz" | awk '{print $1}')"
@@ -53,11 +53,11 @@ export release_sizex="$(du -sh "${release_file}.xz" | awk '{print $1}')b"
 popd || exit 1
 
 # Push the commits and releases
-pushd "${DIR}/greenforce_clang" || exit 1
+pushd "${DIR}/dv_clang" || exit 1
 bash "${DIR}/tc_scripts/info.sh"
 git add .
 git commit -s -m "$(cat /tmp/commit_msg)"
-git push "https://${ghuser_name}:${GITHUB_TOKEN}@github.com/greenforce-project/greenforce_clang" main -f
+git push "https://${ghuser_name}:${GITHUB_TOKEN}@github.com/xaverodumpster/dv_clang" main -f
 
 if gh release view "${release_tag}"; then
     for release_file in "${install_path}"/${release_file}*; do

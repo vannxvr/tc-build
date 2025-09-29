@@ -4,14 +4,14 @@
 
 # Build LLVM
 export llvm_log="${DIR}/build-llvm-${release_tag}.log"
-./build-llvm.py ${build_flags} \
+./build-llvm.py ${build_flags} -r release/21.x \
     --bolt \
     --defines LLVM_PARALLEL_COMPILE_JOBS="${cpu_core}" LLVM_PARALLEL_LINK_JOBS="${cpu_core}" \
     --build-stage1-only \
     --build-target distribution \
     --install-folder "${install_path}" \
     --install-target distribution \
-    --projects clang lld polly \
+    --projects clang lld polly bolt compiler-rt \
     --llvm-folder "${DIR}/src/llvm-project" \
     --lto thin \
     --pgo llvm \
